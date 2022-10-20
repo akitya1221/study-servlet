@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/SampleTest")
 public class SampleTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
     /** protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException{} はテンプレートのようなもの **/
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
+	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 		throws ServletException, IOException {
 			// /SampleTestのリクエストがあった場合、JSPを表示
-			request.getRequestDispatcher("/WEB-INF/view/sample.jsp").forward(request, response);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/sample.jsp");
+			dispatcher.forward(req, res);
+			
+			// 下記は省略した書き方
+			// req.getRequestDispatcher("/WEB-INF/view/sample.jsp").forward(req, res);
 		}
 }
